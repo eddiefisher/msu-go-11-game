@@ -8,13 +8,29 @@ package main
 
 import "fmt"
 
-var (
-  Version string
-  Build   string
-)
+var players Players
+var rooms Rooms
 
 func main() {
-  fmt.Println("Version: ", Version)
-  fmt.Println("Built Time: ", Build)
-  fmt.Println("Hello, Eddie Fisher!")
+	initGame()
+
+	currentPlayer := players[0]
+	currentRoom := currentPlayer.room
+	fmt.Println(currentPlayer)
+	fmt.Println(currentPlayer.id)
+	fmt.Println("Have Backpack:", currentPlayer.haveBackpack)
+	fmt.Println(currentRoom.Lookup())
+	fmt.Println(currentRoom.CanIGoToRoom("коридор"), "могу пойти в коридор?")
+	fmt.Println(currentRoom.CanIGoToRoom("комната"), "могу пойти в комната?")
+	// fmt.Println(currentRoom.Lookup(), "перешел в:", currentRoom.name)
+}
+
+func initGame() {
+	rooms = Rooms{
+		{id: 1, name: "кухня", associated: map[int]string{2: "коридор"}, def: true},
+		{id: 2, name: "коридор", associated: map[int]string{1: "кухня", 3: "комната"}},
+		{id: 3, name: "комната", associated: map[int]string{2: "коридор"}},
+	}
+
+	players.NewPlayer(rooms.GetByName("кухня"))
 }

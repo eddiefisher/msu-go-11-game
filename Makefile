@@ -8,7 +8,7 @@ VERSION=1.0.0
 BUILD=`git rev-parse HEAD`
 
 # Setup the -ldflags option for go build here, interpolate the variable values
-LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD}"
+#LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.Build=${BUILD}"
 
 # Prepend our _vendor directory to the system GOPATH
 # so that import path resolution will prioritize
@@ -21,7 +21,7 @@ export GOPATH
 
 # Builds the project
 $(BINARY):
-	go build ${LDFLAGS} -v -o ./bin/${BINARY} ./src/${BINARY}.go
+	go build -v -o ./bin/${BINARY} ./src/*
 
 # https://github.com/golang/lint
 # go get github.com/golang/lint/golint
@@ -37,7 +37,7 @@ test:
 
 # Installs our project: copies binaries
 install:
-	go install ${LDFLAGS} -o ./bin/${BINARY}
+	go install -o ./bin/${BINARY}
 
 # Cleans our project: deletes binaries
 clean:
