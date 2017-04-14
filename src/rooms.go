@@ -4,6 +4,8 @@
 
 package main
 
+import "strings"
+
 type Rooms []Room
 
 func (r Rooms) GetByName(name string) Room {
@@ -12,7 +14,7 @@ func (r Rooms) GetByName(name string) Room {
 			return v
 		}
 	}
-	panic("Room Not Found")
+	panic("Комната не найдена")
 }
 
 type Room struct {
@@ -25,16 +27,19 @@ type Room struct {
 
 func (r Room) Lookup() string {
 	if r.def {
-		return "ты находишься на кухне, . можно пройти - " + r.AssociatedRooms()
+		return "ты находишься на кухне, " + r.ItemsToString() + ", надо " + currentPlayer.quests.ToString() + ". можно пройти - " + r.AssociatedToString()
 	}
-	return "пустая комната. можно пройти - " + r.AssociatedRooms()
+	return "пустая комната. можно пройти - " + r.AssociatedToString()
 }
 
-func (r Room) AssociatedRooms() string {
+func (r Room) AssociatedToString() string {
 	var res string
+	roomsArray := make([]string, 0, 2)
 	for _, v := range r.associated {
-		res += v
+		roomsArray = append(roomsArray, v)
 	}
+	res = strings.Join(roomsArray, ", ")
+
 	return res
 }
 
@@ -42,4 +47,15 @@ func (r Room) CanIGoToRoom(s string) bool {
 	room := rooms.GetByName(s)
 	_, ok := r.associated[room.id]
 	return ok
+}
+
+func (r Room) ItemsToString() string {
+	var res string
+	for _, v := range r.items {
+		res += v.name
+	}
+	if len(res) == 0 {
+		res = "ничего интересного"
+	}
+	return res
 }

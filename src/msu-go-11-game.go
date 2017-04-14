@@ -9,20 +9,23 @@ package main
 import "fmt"
 
 var players Players
+var currentPlayer Player
 var rooms Rooms
 
 func main() {
 	initGame()
 
-	currentPlayer := players[0]
-	currentRoom := currentPlayer.room
+	currentPlayer = players[0]
 	fmt.Println(currentPlayer)
 	fmt.Println(currentPlayer.id)
 	fmt.Println("Have Backpack:", currentPlayer.haveBackpack)
-	fmt.Println(currentRoom.Lookup())
-	fmt.Println(currentRoom.CanIGoToRoom("коридор"), "могу пойти в коридор?")
-	fmt.Println(currentRoom.CanIGoToRoom("комната"), "могу пойти в комната?")
-	// fmt.Println(currentRoom.Lookup(), "перешел в:", currentRoom.name)
+	fmt.Println(currentPlayer.room.Lookup())
+	fmt.Println(currentPlayer.Go("комната"))
+	fmt.Println(currentPlayer.room.Lookup())
+	fmt.Println(currentPlayer.Go("коридор"))
+	fmt.Println(currentPlayer.room.Lookup())
+	fmt.Println(currentPlayer.Go("комната"))
+	fmt.Println(currentPlayer.room.Lookup())
 }
 
 func initGame() {

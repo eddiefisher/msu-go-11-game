@@ -4,4 +4,6 @@
 
 package main
 
-type Item struct{}
+type Item struct {
+	name string
+}
