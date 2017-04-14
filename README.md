@@ -1,10 +1,10 @@
 [godoc.org]: http://godoc.org/github.com/eddiefisher/msu-go-11-game "godoc.org"
 
-##Install
+## Install
 
     go get github.com/eddiefisher/msu-go-11-game
 
-##Docs
+## Docs
 
 Творческое задание - простая текстовая игра.
 Играть в неё можно вводя команды в консоли.
@@ -33,11 +33,11 @@ $команда $параметр1 $параметр2 $параметр3
 Не стесняйтесь. Не забывайте, что у нас есть канал в телеграме - лучше спрашивать туда.
 Однако преждем чем спрашивать - попробуйте что-то сделать и четко сформулируйте, что у вас не получается.
 
-##Author
+## Author
 
-Eddie Fisher [eddi.fisher@gmail.com]
+Eddie Fisher [eddi.fisher [a] gmail.com]
 
-##Copyright & License
+## Copyright & License
 
 Copyright (c) 2017, Eddie Fisher.
 All rights reserved.
