@@ -39,7 +39,14 @@ func initGame() {
 		{id: 1, name: "кухня", associated: map[int]string{2: "коридор"}, def: true},
 		{id: 2, name: "коридор", associated: map[int]string{1: "кухня", 3: "комната"}},
 		{id: 3, name: "комната", associated: map[int]string{2: "коридор"},
-			items: []Item{{"ключи"}, {"конспекты"}},
+			roomPlace: []RoomPlace{{
+				name:  "стол",
+				items: []Item{{"ключи"}, {"конспекты"}},
+			},
+				{
+					name:  "стул",
+					items: []Item{{"рюкзак"}},
+				}},
 		},
 	}
 
