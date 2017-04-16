@@ -4,6 +4,10 @@
 
 package main
 
+import (
+	"strings"
+)
+
 type RoomPlace struct {
 	name  string
 	items []Item
@@ -16,4 +20,12 @@ func (rp RoomPlace) HaveItem(s string) (Item, bool) {
 		}
 	}
 	return Item{}, false
+}
+
+func (rp RoomPlace) ItemsToString() string {
+	ss := make([]string, 0, len(rp.items))
+	for _, v := range rp.items {
+		ss = append(ss, v.name)
+	}
+	return strings.Join(ss, ", ")
 }

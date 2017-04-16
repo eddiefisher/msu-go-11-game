@@ -18,6 +18,9 @@ func (r Room) Lookup() string {
 	if r.def {
 		return "ты находишься на кухне, " + r.ItemsToString() + ", надо " + currentPlayer.quests.ToString() + ". можно пройти - " + r.AssociatedToString()
 	}
+	if len(r.ItemsToString()) > 0 {
+		return r.ItemsToString() + ". можно пройти - " + r.AssociatedToString()
+	}
 	return "пустая " + r.name + ". можно пройти - " + r.AssociatedToString()
 }
 
@@ -41,7 +44,7 @@ func (r Room) CanIGoToRoom(s string) bool {
 func (r Room) ItemsToString() string {
 	var res string
 	for _, v := range r.roomPlace {
-		res += v.name
+		res += v.name + " " + v.ItemsToString()
 	}
 	res = DefaultForEmptyString(res, "ничего интересного")
 
