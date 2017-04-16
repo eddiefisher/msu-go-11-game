@@ -29,8 +29,7 @@ func (q Quests) ToString() string {
 		}
 	}
 	res = strings.Join(quests, " и ")
-	if len(quests) == 0 {
-		res = "заданий нет"
-	}
+	res = DefaultForEmptyString(res, "заданий нет")
+
 	return res
 }

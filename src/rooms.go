@@ -29,7 +29,7 @@ func (r Room) Lookup() string {
 	if r.def {
 		return "ты находишься на кухне, " + r.ItemsToString() + ", надо " + currentPlayer.quests.ToString() + ". можно пройти - " + r.AssociatedToString()
 	}
-	return "пустая комната. можно пройти - " + r.AssociatedToString()
+	return "пустая " + r.name + ". можно пройти - " + r.AssociatedToString()
 }
 
 func (r Room) AssociatedToString() string {
@@ -54,8 +54,16 @@ func (r Room) ItemsToString() string {
 	for _, v := range r.items {
 		res += v.name
 	}
-	if len(res) == 0 {
-		res = "ничего интересного"
-	}
+	res = DefaultForEmptyString(res, "ничего интересного")
+
 	return res
+}
+
+func (r Room) GetItemByName(s string) (Item, bool) {
+	for _, v := range r.items {
+		if v.name == s {
+			return v, true
+		}
+	}
+	return Item{}, false
 }

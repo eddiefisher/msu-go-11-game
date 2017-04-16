@@ -35,3 +35,20 @@ func (p *Player) goToRoom(r Room) bool {
 	}
 	return false
 }
+
+func (p *Player) ClotheBackpack() string {
+	p.haveBackpack = true
+	return "вы одели: рюкзак"
+}
+
+func (p *Player) TakeItem(s string) string {
+	if !currentPlayer.haveBackpack {
+		return "некуда класть"
+	}
+
+	if i, ok := currentPlayer.room.GetItemByName(s); ok {
+		currentPlayer.backpack = append(currentPlayer.backpack, i)
+		return "предмет добавлен в инвентарь: " + i.name
+	}
+	return "нет такого"
+}
